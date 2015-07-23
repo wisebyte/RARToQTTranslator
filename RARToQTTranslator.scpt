@@ -426,7 +426,7 @@ close access theFileReference
 
 -- clean up the trash
 tell application "AJA DPXToQTTranslator" to quit
-tell application "Adobe Media Encoder CC 2014" to quit
+tell application "Adobe Media Encoder CS6" to quit
 delay 5
 tell application "Finder"
 	move folder ame_base & "Source" to trash
