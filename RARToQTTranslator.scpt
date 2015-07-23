@@ -15,7 +15,7 @@ set notify_bad to "Bad RAR"
 -- read from preference file then mount if preference file exists… if not ask for paths then write it out to a preference file
 set Preference_folder to (path to library folder from user domain as string) & "Preferences:"
 set preferencefile to Preference_folder & "com.meza.RAR2AJA.preferences"
-tell application "Adobe Media Encoder CC 2014" to launch -- startup the Media Encoder
+tell application "Adobe Media Encoder CS6" to launch -- startup the Media Encoder
 tell application "Finder"
 	
 	if exists preferencefile then
@@ -429,7 +429,7 @@ tell application "AJA DPXToQTTranslator" to quit
 tell application "Adobe Media Encoder CS6" to quit
 delay 5
 tell application "Finder"
-	move folder ame_base & "Source" to trash
-	empty trash
+	move folder (ame_base & "Source") to trash
 	if folder plug_folder exists then delete folder plug_folder
+	empty trash
 end tell
