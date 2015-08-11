@@ -7,6 +7,9 @@ I don't know who else needs something like this, so if you do you can benefit fr
 
 Made by Meza Hsu Oct. 24th 2012 to solve the problem of DXP to ProRes conversion
 
+# Functionality
+This is an AppleScript that will UNRAR a file containing DPX image sequences, send it to AJA DPXToQTTranslator and convert it to an AJA MOV file, then send it to AME to convert to ProRes444.
+
 ## Changlog ##
 
 version 8.2 2015.07.23
