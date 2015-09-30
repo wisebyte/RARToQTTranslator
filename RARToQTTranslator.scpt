@@ -1,5 +1,6 @@
 #!/usr/bin/osascript
-
+-- set delimiter
+set AppleScript's text item delimiters to {"_"}
 -- here's the .counter file dictionary below:
 set good_counter to 0 -- line 1: to help generate a journal of good files processed
 set btrans_counter to 0 -- line 2: to help generate a journal of bad transfer files received
@@ -360,27 +361,25 @@ repeat
 	else
 		repeat with drill_file in drill_files
 			set skip to true
-			set suffix to ""
 			
 			-- parse file name
 			set name_length to length of drill_file
 			set name_extension to text (name_length - 3) thru name_length of drill_file
-			set prefix to text 1 thru 3 of drill_file
-			set basename to text 4 thru ((offset of name_extension in drill_file) - 1) of drill_file
+			set prefix to "cp_" & first text item of drill_file
+			set cam to second text item of drill_file
+			set iteration to "v" & third text item of drill_file
 			-- display dialog "file prefix: " & prefix & return & "basename: " & basename & return & "file extension: " & name_extension
 			if name_extension = ".mov" then
-				set suffix to "_ProRes444"
 				set destination to "ProRes:"
 				set skip to false
 			end if
 			if name_extension = ".mp4" then
-				set suffix to "_H264"
 				set destination to "mp4:"
 				set skip to false
 			end if
 			
 			-- assemble desired file name
-			set new_name to {prefix, basename, suffix, name_extension} as string
+			set new_name to {prefix, cam, iteration} as string
 			
 			-- move the file if it's a mov or mp4 file, else skip it
 			if not skip then
