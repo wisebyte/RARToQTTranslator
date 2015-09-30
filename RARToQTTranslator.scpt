@@ -341,8 +341,8 @@ end if
 delay 60
 
 -- find prefix and extension of file then determine if needs to be fixed then fix it then move it… if not ignore
-set savedDelimiters to AppleScript's text item delimiters
-set AppleScript's text item delimiters to {"_"}
+
+
 repeat
 	-- wait until AME is not busy
 	repeat
@@ -357,7 +357,7 @@ repeat
 	
 	delay 30 -- give it some time to finish releasing the file
 	
-
+	
 	tell application "Finder" to set drill_files to name of files of folder ame_output
 	if drill_files is {} then
 		exit repeat
@@ -366,6 +366,8 @@ repeat
 			set skip to true
 			
 			-- parse file name
+			set savedDelimiters to AppleScript's text item delimiters
+			set AppleScript's text item delimiters to {"_"}
 			set name_length to length of drill_file
 			set name_extension to text (name_length - 3) thru name_length of drill_file
 			set prefix to "cp_" & first text item of drill_file
@@ -383,6 +385,7 @@ repeat
 			
 			-- assemble desired file name
 			set new_name to {prefix, cam, iteration} as string
+			set AppleScript's text item delimiters to savedDelimiters
 			
 			-- move the file if it's a mov or mp4 file, else skip it
 			if not skip then
@@ -403,7 +406,8 @@ repeat
 	end if
 	
 end repeat
-set AppleScript's text item delimiters to savedDelimiters
+
+
 
 -- send summary notification… send one email per session rather than one email each conversion to cut down on email clutter
 if good_counter = 1 then
