@@ -1,6 +1,5 @@
 #!/usr/bin/osascript
--- set delimiter
-set AppleScript's text item delimiters to {"_"}
+
 -- here's the .counter file dictionary below:
 set good_counter to 0 -- line 1: to help generate a journal of good files processed
 set btrans_counter to 0 -- line 2: to help generate a journal of bad transfer files received
@@ -329,6 +328,7 @@ repeat
 	end if
 end repeat
 
+
 -- move files to Adobe Media Encoder watchfolder
 tell application "Finder" to set drill_files to name of files of folder aja_folder
 if drill_files is not {} then
@@ -341,6 +341,8 @@ end if
 delay 60
 
 -- find prefix and extension of file then determine if needs to be fixed then fix it then move it… if not ignore
+set savedDelimiters to AppleScript's text delimiters
+set AppleScript's text item delimiters to {"_"}
 repeat
 	-- wait until AME is not busy
 	repeat
@@ -355,6 +357,7 @@ repeat
 	
 	delay 30 -- give it some time to finish releasing the file
 	
+
 	tell application "Finder" to set drill_files to name of files of folder ame_output
 	if drill_files is {} then
 		exit repeat
@@ -398,7 +401,9 @@ repeat
 			
 		end repeat
 	end if
+	
 end repeat
+set AppleScript's text item delimiters to savedDelimiters
 
 -- send summary notification… send one email per session rather than one email each conversion to cut down on email clutter
 if good_counter = 1 then
