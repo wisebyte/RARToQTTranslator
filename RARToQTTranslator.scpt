@@ -341,7 +341,7 @@ end if
 delay 60
 
 -- find prefix and extension of file then determine if needs to be fixed then fix it then move it… if not ignore
-set savedDelimiters to AppleScript's text delimiters
+set savedDelimiters to AppleScript's text item delimiters
 set AppleScript's text item delimiters to {"_"}
 repeat
 	-- wait until AME is not busy
